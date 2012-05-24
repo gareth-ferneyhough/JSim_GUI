@@ -89,7 +89,7 @@ public class Simbicon extends java.applet.Applet
     	try{
     		  // Open the file that is the first 
     		  // command line parameter
-    		  FileInputStream fstream = new FileInputStream("run_params_045.txt");
+    		  FileInputStream fstream = new FileInputStream("run_params_01.txt");
     		  // Get the object of DataInputStream
     		  DataInputStream in = new DataInputStream(fstream);
     		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
