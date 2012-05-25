@@ -39,6 +39,8 @@ public class Simbicon extends java.applet.Applet
     //and the controller
     Controller con;
     
+    //GF
+    float totalTorques[] = new float[7];
     
     float Md, Mdd;
     
@@ -89,7 +91,7 @@ public class Simbicon extends java.applet.Applet
     	try{
     		  // Open the file that is the first 
     		  // command line parameter
-    		  FileInputStream fstream = new FileInputStream("run_params_01.txt");
+    		  FileInputStream fstream = new FileInputStream("run_params_1-beta-025-2.txt");
     		  // Get the object of DataInputStream
     		  DataInputStream in = new DataInputStream(fstream);
     		  BufferedReader br = new BufferedReader(new InputStreamReader(in));
@@ -136,6 +138,9 @@ public class Simbicon extends java.applet.Applet
         addMouseListener(this);
         addMouseMotionListener(this);
         
+        //GF
+        for(int i = 0; i < 7; ++i)
+        	totalTorques[i] = 0;
         
         //initialize the biped to a valid state:
         float[] state = {0.463f, 0.98f, 0.898f, -0.229f, 0.051f, 0.276f, -0.221f, -1.430f, -0.217f, 0.086f, 0.298f, -3.268f, -0.601f, 3.167f, 0.360f, 0.697f, 0.241f, 3.532f};
@@ -384,6 +389,13 @@ public class Simbicon extends java.applet.Applet
         for (int i=0;i<200;i++){
             bip7.computeGroundForces(gnd);
             bip7Control(bip7.t);
+            
+            // save torques
+            //for(int index_t = 0; index_t < 7; ++index_t){
+            //	totalTorques[index_t] = Math.abs(bip7.t[index_t]);
+            //}
+            //
+            
             bip7.runSimulationStep(Dt);
             
             timeEllapsed += Dt;
@@ -391,6 +403,12 @@ public class Simbicon extends java.applet.Applet
                 //we need to redraw the frame
                 this.update(this.getGraphics());
                 timeEllapsed = 0;
+                
+                //
+                //for(int index_t = 0; index_t < 7; ++index_t){
+                //	System.out.println("torque " + index_t + ":" + totalTorques[index_t]);
+                //}
+                //
                 
                 int state = con.fsmState;
             	if (state == 6 && last_state != 6){

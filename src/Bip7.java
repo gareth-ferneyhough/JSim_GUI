@@ -64,7 +64,7 @@ public class Bip7 {
 	for (int i=0; i<NMON*3; i++) {
 		FootState[i] = 0;
 	}
-        for (int i=0;i<nrStates;i++){
+        for (int i=0;i<nrStates;i++){	
             State[i] = CopyState[i];
         }
         lostControl = false;
